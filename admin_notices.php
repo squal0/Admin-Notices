@@ -24,13 +24,15 @@ add_action('admin_notices','wp_admin_notice_inject_notice');
  * @return type
  */
 function wp_admin_notice_add_quick_settings_link($links, $file) {
-    if ($file == plugin_basename(__FILE__)) {
-        $link = admin_url('options-general.php?page=' . plugin_basename(__FILE__));
-        $dashboard_link = "<a href=\"{$link}\">".__('Settings')."</a>";
-        array_unshift($links, $dashboard_link);
-    }
+	if ($file == plugin_basename(__FILE__)) {
 
-    return $links;
+		$link = admin_url('options-general.php?page=' . plugin_basename(__FILE__));
+		$dashboard_link = "<a href=\"{$link}\">".__('Settings')."</a>";
+		array_unshift($links, $dashboard_link);
+
+	}
+
+	return $links;
 }
 
 /**
@@ -38,18 +40,20 @@ function wp_admin_notice_add_quick_settings_link($links, $file) {
  * @global string $wp_version
  */
 function wp_admin_notice_admin_init() {
-    wp_admin_notice_register_settings();
 
-    global $wp_version;
+	wp_admin_notice_register_settings();
 
-    $color_picker = version_compare($wp_version, '3.5') >= 0 ? 'wp-color-picker' // new WP
-            : 'farbtastic'; // old WP
+	global $wp_version;
 
-    wp_enqueue_style($color_picker);
-    wp_enqueue_script($color_picker);
+	$color_picker = version_compare($wp_version, '3.5') >= 0 ? 'wp-color-picker' // new wordpress
+			: 'farbtastic'; // old wordpress
 
-    wp_register_script('simple_notice_admin', plugins_url("/js/admin_notices.js", __FILE__), array('jquery',), '1.0', true);
-    wp_enqueue_script('simple_notice_admin');
+	wp_enqueue_style($color_picker);
+	wp_enqueue_script($color_picker);
+
+	wp_register_script('simple_notice_admin', plugins_url("/js/admin_notices.js", __FILE__), array('jquery',), '1.0', true);
+	wp_enqueue_script('simple_notice_admin');
+
 }
 
 /**
@@ -57,14 +61,17 @@ function wp_admin_notice_admin_init() {
  * @global string $pagenow current page,for example 'plugins.php'
  * @return type
  */
-function wp_admin_notice_inject_notice() {
-    global $pagenow;
-    // This applies only for the live site.
-    if ( defined( 'DOING_AJAX' ) || !is_admin()) {
-        return;
-    }
 
-    echo get_wp_admin_notice_html();
+function wp_admin_notice_inject_notice() {
+
+	global $pagenow;
+	// This applies only for the live site.
+	if ( defined( 'DOING_AJAX' ) || !is_admin()) {
+
+		return;
+	}
+
+	echo get_wp_admin_notice_html();
 }
 
 /**
@@ -72,23 +79,26 @@ function wp_admin_notice_inject_notice() {
  * @return string $html
  */
 function get_wp_admin_notice_html(){
-    $opts = wp_admin_notice_get_options();
-    $current_date = date('Y-m-d');
-    $dismissible = 'notice is-dismissible';
-    if($opts['status'] && ($opts['end_date'] != $current_date)){
-        $notice = $opts['notice'] ? $opts['notice'] : '';
-        $role = $opts['role'] ? $opts['role'] : 'administrator';
-        $text_color = $opts['text_color'] ? $opts['text_color'] : '#444';
-        $font_size = $opts['font_size'] ? $opts['font_size'] : '12px';
-        $style = $opts['style'] ? $opts['style'] : 'updated';
-        $start_date = $opts['start_date'] ? $opts['start_date'] : '';
-        $end_date = $opts['end_date'] ? $opts['end_date'] : '';
-        return "<div class='{$style} {$dismissible }' ><h4 style='color:{$text_color};font-size:{$font_size}'>{$notice}</h4>
-        <small><b>End Date:</b></small>
-        <small>{$end_date}</small>
-        </div>";
-    }
-    return '';
+	$opts = wp_admin_notice_get_options();
+	$current_date = date('Y-m-d');
+	$dismissible = 'notice is-dismissible';
+
+	if($opts['status'] && ($opts['end_date'] != $current_date) && ($opts['start_date'] == $current_date)){
+
+		$notice = $opts['notice'] ? $opts['notice'] : '';
+		$role = $opts['role'] ? $opts['role'] : 'administrator';
+		$text_color = $opts['text_color'] ? $opts['text_color'] : '#444';
+		$font_size = $opts['font_size'] ? $opts['font_size'] : '12px';
+		$style = $opts['style'] ? $opts['style'] : 'updated';
+		$start_date = $opts['start_date'] ? $opts['start_date'] : '';
+		$end_date = $opts['end_date'] ? $opts['end_date'] : '';
+
+		return "<div class='{$style} {$dismissible }' ><h4 style='color:{$text_color};font-size:{$font_size}'>{$notice}</h4>
+		</div>";
+
+	}
+
+	return '';
 }
 
 /**
@@ -97,28 +107,32 @@ function get_wp_admin_notice_html(){
 
 function restrictly_get_current_user_role() {
   if( is_user_logged_in() ) {
-    $user = wp_get_current_user();
-    $role = ( array ) $user->roles;
-    return $role[0];
+	$user = wp_get_current_user();
+	$role = ( array ) $user->roles;
+	return $role[0];
   } else {
-    return false;
+	return false;
   }
  }
 
 /**
  * setup admin menu
  */
-function wp_admin_notice_setup_admin() {
-    add_options_page('Admin Notices', 'Admin Notices', 'manage_options', __FILE__, 'wp_admin_notice_options_page');
 
-    add_filter('plugin_action_links', 'wp_admin_notice_add_quick_settings_link', 10, 2);
+function wp_admin_notice_setup_admin() {
+
+	add_options_page('Admin Notices', 'Admin Notices', 'manage_options', __FILE__, 'wp_admin_notice_options_page');
+
+	add_filter('plugin_action_links', 'wp_admin_notice_add_quick_settings_link', 10, 2);
 }
 
 /**
  * Sets the setting variables
  */
+
 function wp_admin_notice_register_settings() { // whitelist options
-    register_setting('wp_admin_notice_settings', 'wp_admin_notice_options', 'wp_admin_notice_validate_settings');
+
+	register_setting('wp_admin_notice_settings', 'wp_admin_notice_options', 'wp_admin_notice_validate_settings');
 }
 
 /**
@@ -127,18 +141,20 @@ function wp_admin_notice_register_settings() { // whitelist options
  * @param array the entered data from the settings page.
  * @return array the modified input array
  */
+
 function wp_admin_notice_validate_settings($input) { // whitelist options
-    $input = array_map('trim', $input);
 
-    // did the extension break stuff?
-    $input = is_array($input_filtered) ? $input_filtered : $input;
+	$input = array_map('trim', $input);
 
-    // for font size we want 12px
-    if ($input['font_size']) {
-        $input['font_size'] = preg_replace('#\s#si', '', $input['font_size']);
-    }
+	// did the extension break stuff?
+	$input = is_array($input_filtered) ? $input_filtered : $input;
 
-    return $input;
+	// for font size we want 12px
+	if ($input['font_size']) {
+		$input['font_size'] = preg_replace('#\s#si', '', $input['font_size']);
+	}
+
+	return $input;
 }
 
 /**
@@ -146,32 +162,36 @@ function wp_admin_notice_validate_settings($input) { // whitelist options
  * The saving is handled by the settings page. Basically, we submit to WP and it takes care of the saving.
  * @return array $opts
  */
+
 function wp_admin_notice_get_options() {
-    $defaults = array(
-        'status' => 0,
-        'text_color' => '#444',
-        'font_size' => '12px',
-        'role' => 'administrator',
-        'style' => 'updated',
-        'start_date' => 'mm/dd/yyyy',
-        'end_date' => 'mm/dd/yyyy',
-        'notice' => 'Update WordPress today at 10am. Ensure to backup website.',
-    );
 
-    $opts = get_option('wp_admin_notice_options');
+	$defaults = array(
 
-    $opts = (array) $opts;
-    $opts = array_merge($defaults, $opts);
+		'status' => 0,
+		'text_color' => '#444',
+		'font_size' => '12px',
+		'role' => 'administrator',
+		'style' => 'updated',
+		'start_date' => 'mm/dd/yyyy',
+		'end_date' => 'mm/dd/yyyy',
+		'notice' => 'Update WordPress today at 10am. Ensure to backup website.',
+	);
 
-    return $opts;
+	$opts = get_option('wp_admin_notice_options');
+
+	$opts = (array) $opts;
+	$opts = array_merge($defaults, $opts);
+
+	return $opts;
 }
 
 /**
  * Options page
  */
 function wp_admin_notice_options_page() {
-    $opts = wp_admin_notice_get_options();
-    global $wp_version;
-    require dirname(__FILE__).'/options-page.php';
+
+	$opts = wp_admin_notice_get_options();
+	global $wp_version;
+	require dirname(__FILE__).'/options-page.php';
 }
 
