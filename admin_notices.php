@@ -80,19 +80,24 @@ function wp_admin_notice_inject_notice() {
  */
 function get_wp_admin_notice_html(){
 	$opts = wp_admin_notice_get_options();
-	$current_date = date('Y-m-d');
+	$current_date = strtotime('now');
 	$current_role = current_user_can($opts['role']);
 	$dismissible = 'notice is-dismissible';
 
-	if($current_role && $opts['status'] && ($opts['end_date'] != $current_date) && ($opts['start_date'] == $current_date)){
+	$start_date = $opts['start_date'] ? $opts['start_date'] : '';
+	$end_date 	= $opts['end_date'] ? $opts['end_date'] : '';
+
+	$start_date = strtotime( $start_date );
+	$end_date 	= strtotime( $end_date );
+
+	if($current_role && $opts['status'] && ( ( $current_date >= $start_date) && ( $current_date <= $end_date ) )){
 
 		$notice = $opts['notice'] ? $opts['notice'] : '';
 		$role = $opts['role'] ? $opts['role'] : 'administrator';
 		$text_color = $opts['text_color'] ? $opts['text_color'] : '#444';
 		$font_size = $opts['font_size'] ? $opts['font_size'] : '12px';
 		$style = $opts['style'] ? $opts['style'] : 'notice-success';
-		$start_date = $opts['start_date'] ? $opts['start_date'] : '';
-		$end_date = $opts['end_date'] ? $opts['end_date'] : '';
+		
 
 		return "<div class='{$style} {$dismissible }' ><h4 style='color:{$text_color};font-size:{$font_size}'>{$notice}</h4>
 		</div>";
