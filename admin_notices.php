@@ -93,10 +93,16 @@ function get_wp_admin_notice_html(){
 		$style = $opts['style'] ? $opts['style'] : 'notice-success';
 		$start_date = $opts['start_date'] ? $opts['start_date'] : '';
 		$end_date = $opts['end_date'] ? $opts['end_date'] : '';
-
-		return "<div class='{$style} {$dismissible }' ><h4 style='color:{$text_color};font-size:{$font_size}'>{$notice}</h4>
+		
+		$notice_info = "<div class='{$style} {$dismissible}' ><h4 style='color:{$text_color};font-size:{$font_size}'>{$notice}</h4>
 		</div>";
-
+		$notices = array($notice_info);
+		$notices_length = count($notices);
+		
+		for($i=0; $i < $notices_length; $i++){
+			
+					return $notices[$i];
+		}
 	}
 
 	return '';
