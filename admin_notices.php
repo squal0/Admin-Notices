@@ -81,9 +81,10 @@ function wp_admin_notice_inject_notice() {
 function get_wp_admin_notice_html(){
 	$opts = wp_admin_notice_get_options();
 	$current_date = date('Y-m-d');
+	$current_role = current_user_can($opts['role']);
 	$dismissible = 'notice is-dismissible';
 
-	if($opts['status'] && ($opts['end_date'] != $current_date) && ($opts['start_date'] == $current_date)){
+	if($current_role && $opts['status'] && ($opts['end_date'] != $current_date) && ($opts['start_date'] == $current_date)){
 
 		$notice = $opts['notice'] ? $opts['notice'] : '';
 		$role = $opts['role'] ? $opts['role'] : 'administrator';

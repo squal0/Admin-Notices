@@ -44,6 +44,7 @@
 									<label for="wp_admin_notice_options_role">
 									<select id="wp_admin_notice_options_role" name="wp_admin_notice_options[role]">
 										<option value="administrator" <?php echo $opts['role']=='administrator' ? 'selected' : '';?>>Administrator</option>
+										<option value="editor"   <?php echo $opts['role']=='editor' ? 'selected' : '';?>>Editor</option>
 										<option value="contributor"   <?php echo $opts['role']=='contributor' ? 'selected' : '';?>>Contributor</option>
 										<option value="author"   <?php echo $opts['role']=='author' ? 'selected' : '';?>>Author</option>
 									</select>
