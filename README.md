@@ -21,9 +21,9 @@ WordPress plugin allows you to create and show custom notices to alert different
  
 ### Screenshots
 
-1. images/Screenshot-2018-3-2 Admin Notices.png
-2. images/Screenshot-2018-3-2 Admin Notices(1).png
-3. images/Screenshot-2018-3-2 Admin Notices(2).png
+1. images/Screenshot-Admin Notices.png
+2. images/Screenshot-Admin Notices(1).png
+3. images/Screenshot-Admin Notices(2).png
 
 ## Changelog 
 
