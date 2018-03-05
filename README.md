@@ -1,17 +1,17 @@
 ## Admin Notices
 
-Tags: notice, alert, admin notices
-Requires at least: 3.5+
-Tested up to: 4.2
-Stable tag: 1.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+* Tags: notice, alert, admin notices
+* Requires at least: 3.5+
+* Tested up to: 4.9
+* Stable tag: 1.0
+* License: GPLv2 or later
+* License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-_WordPress plugin allows you to create and show custom notices to alert different user roles
+_WordPress plugin allows you to create and show custom notices to alert different user roles_
 
 ### Description
 
-_WordPress plugin allows you to create and show custom notices to alert admins_.
+WordPress plugin allows you to create and show custom notices to alert admins.
 
 ### Installation
 
