@@ -89,7 +89,7 @@ function get_wp_admin_notice_html(){
 		$role = $opts['role'] ? $opts['role'] : 'administrator';
 		$text_color = $opts['text_color'] ? $opts['text_color'] : '#444';
 		$font_size = $opts['font_size'] ? $opts['font_size'] : '12px';
-		$style = $opts['style'] ? $opts['style'] : 'updated';
+		$style = $opts['style'] ? $opts['style'] : 'notice-success';
 		$start_date = $opts['start_date'] ? $opts['start_date'] : '';
 		$end_date = $opts['end_date'] ? $opts['end_date'] : '';
 
@@ -171,7 +171,7 @@ function wp_admin_notice_get_options() {
 		'text_color' => '#444',
 		'font_size' => '12px',
 		'role' => 'administrator',
-		'style' => 'updated',
+		'style' => 'notice-success',
 		'start_date' => 'mm/dd/yyyy',
 		'end_date' => 'mm/dd/yyyy',
 		'notice' => 'Update WordPress today at 10am. Ensure to backup website.',

@@ -85,8 +85,10 @@
 							<td>
 								<label for="wp_admin_notice_options_style">
 									<select id="wp_admin_notice_options_style" name="wp_admin_notice_options[style]">
-										<option value="updated" <?php echo $opts['style']=='updated' ? 'selected' : '';?>>green</option>
-										<option value="error"   <?php echo $opts['style']=='error' ? 'selected' : '';?>>red</option>
+										<option value="notice-success" <?php echo $opts['style']=='notice-success' ? 'selected' : '';?>>success</option>
+										<option value="notice-error"   <?php echo $opts['style']=='notice-error' ? 'selected' : '';?>>error</option>
+										<option value="notice-info"   <?php echo $opts['style']=='notice-info' ? 'selected' : '';?>>info</option>
+										<option value="notice-warning"   <?php echo $opts['style']=='notice-warning' ? 'selected' : '';?>>warning</option>
 									</select>
 								</label>
 								<p><?php _e('Select the display style for notice') ?></p>
