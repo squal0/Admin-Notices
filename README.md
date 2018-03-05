@@ -11,7 +11,7 @@ _WordPress plugin allows you to create and show custom notices to alert differen
 
 ### Description
 
-WordPress plugin allows you to create and show custom notices to alert admins.
+WordPress plugin allows you to create and show custom notices to alert different user roles.
 
 ### Installation
 
