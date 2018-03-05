@@ -1,7 +1,7 @@
 <div id="wp_admin_notice_admin_wrapper" class="wrap wp_admin_notice_admin_wrapper">
 	<h2>Admin Notices</h2>
 	<p>
-		<?php _e('This plugin allows you to show a simple notice to alert different user roles.') ?>
+		<?php _e('This plugin allows you to create a simple notice to alert different user roles.') ?>
 	</p>
 
 	<div id="poststuff">
